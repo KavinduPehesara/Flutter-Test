@@ -1,8 +1,10 @@
 import 'dart:io';
-
+import 'package:flutter_test1/provider/internet_provider.dart';
+import 'package:flutter_test1/provider/sign_in_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test1/pages/splash.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   print("Initializing Flutter app...");
@@ -27,9 +29,19 @@ class testapp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Splash(),
-      debugShowCheckedModeBanner: false,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: ((context) => SignIn()),
+        ),
+        ChangeNotifierProvider(
+          create: ((context) => InternetProvider()),
+        ),
+      ],
+      child: const MaterialApp(
+        home: Splash(),
+        debugShowCheckedModeBanner: false,
+      ),
     );
   }
 }

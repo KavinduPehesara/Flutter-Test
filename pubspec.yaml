@@ -29,22 +29,21 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   cloud_firestore: ^4.15.4
+  connectivity_plus: ^5.0.2
   cupertino_icons: ^1.0.2
   firebase_auth: ^4.17.4
   firebase_core: ^2.25.4
   flutter:
     sdk: flutter
   flutter_facebook_auth: ^6.1.0
+  font_awesome_flutter: ^10.7.0
+  font_awesome_icon_class: ^0.0.6
   google_sign_in: ^6.2.1
   provider: ^6.1.1
+  rounded_loading_button: ^2.1.0
+  shared_preferences: ^2.2.2
 
 dev_dependencies:
-
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
