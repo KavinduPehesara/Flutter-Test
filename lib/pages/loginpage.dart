@@ -169,7 +169,7 @@ class _LoginPageState extends State<LoginPage> {
 
   handleAfterSignIn() {
     Future.delayed(const Duration(milliseconds: 1000)).then((value) {
-      nextScreenReplace(context, const MainPage());
+      nextScreenReplace(context, MainPage());
     });
   }
 }
