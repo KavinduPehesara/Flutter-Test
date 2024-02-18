@@ -92,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                   // facebook login button
                   RoundedLoadingButton(
                     onPressed: () {
-                      //handleFacebookAuth();
+                      handleFacebookAuth();
                     },
                     controller: facebookController,
                     successColor: Colors.blue,
@@ -129,6 +129,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future handleGoogleSignIn() async {
+    print("1");
     final sp = context.read<SignIn>();
     final ip = context.read<InternetProvider>();
     await ip.checkInternetConnection();
@@ -158,6 +159,45 @@ class _LoginPageState extends State<LoginPage> {
                   .saveDataToSharedPreferences()
                   .then((value) => sp.setSignIn().then((value) {
                         googleController.success();
+                        handleAfterSignIn();
+                      })));
+            }
+          });
+        }
+      });
+    }
+  }
+
+  Future handleFacebookAuth() async {
+    final sp = context.read<SignIn>();
+    final ip = context.read<InternetProvider>();
+    await ip.checkInternetConnection();
+
+    if (ip.hasInternet == false) {
+      openSnackbar(context, "Check your Internet connection", Colors.red);
+      facebookController.reset();
+    } else {
+      await sp.signInWithFacebook().then((value) {
+        if (sp.hasErrors == true) {
+          openSnackbar(context, sp.errorCode.toString(), Colors.red);
+          facebookController.reset();
+        } else {
+          // checking whether user exists or not
+          sp.checkUserExists().then((value) async {
+            if (value == true) {
+              // user exists
+              await sp.getUserDataFromFirestore(sp.uid).then((value) => sp
+                  .saveDataToSharedPreferences()
+                  .then((value) => sp.setSignIn().then((value) {
+                        facebookController.success();
+                        handleAfterSignIn();
+                      })));
+            } else {
+              // user does not exist
+              sp.saveDataToFirestore().then((value) => sp
+                  .saveDataToSharedPreferences()
+                  .then((value) => sp.setSignIn().then((value) {
+                        facebookController.success();
                         handleAfterSignIn();
                       })));
             }

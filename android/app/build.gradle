@@ -66,4 +66,6 @@ dependencies {
 
     // Firebase Firestore
     implementation 'com.google.firebase:firebase-firestore'
+
+    implementation 'com.facebook.android:facebook-android-sdk:latest.release'
 }

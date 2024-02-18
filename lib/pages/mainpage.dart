@@ -6,20 +6,7 @@ import 'package:flutter_test1/pages/profilepage.dart';
 import 'package:http/http.dart' as http;
 
 void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'HTTP Example',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MainPage(),
-    );
-  }
+  runApp(MainPage());
 }
 
 class MainPage extends StatefulWidget {
@@ -64,7 +51,8 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('HTTP Example'),
+        title: Text('Flutter Test App'),
+        automaticallyImplyLeading: false, // This line removes the back button
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.person),
